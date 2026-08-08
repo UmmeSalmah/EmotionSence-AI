@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Live Face Emotion Detection - EmotionSense AI{% endblock %}
+
+{% block content %}
+<section class="hero-section" id="faceHero">
+    <div class="container">
+        <div class="pastel-card fade-in" id="emotionCard">
+            <h1 class="text-center">
+                <i class="fas fa-smile me-2"></i> Real-Time Face Emotion Detection
+            </h1>
+
+            <!-- 🎥 Webcam Feed -->
+            <div class="video-container">
+                <img id="videoFeed" src="{{ url_for('video_feed') }}" class="video-frame">
+            </div>
+
+            <!-- 📸 Capture Button -->
+            <div class="text-center mt-3">
+                <button id="captureBtn" class="btn btn-pastel">📸 Capture Mood</button>
+            </div>
+
+            <!-- 🏷 Detected Emotion -->
+            <h3 class="mt-3 text-center">
+                Detected Emotion: <span id="emotionLabel">None</span>
+                <span id="emotionEmoji">😐</span>
+            </h3>
+
+            <!-- 🎯 Mood Suggestion Section -->
+            <div class="suggestion-box mt-4">
+                <h2 class="text-center">🎯 Mood Suggestions</h2>
+
+                <div class="suggestion-card">
+                    <h4>💡 Tip</h4>
+                    <p id="faceTip">Waiting for mood detection...</p>
+                </div>
+
+                <div class="suggestion-card">
+                    <h4>🌟 Challenge</h4>
+                    <p id="faceChallenge"></p>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button id="nextSuggestionBtn" class="btn btn-pastel">➡ Next Suggestion</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ✅ JS Section -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const hero = document.getElementById("faceHero");
+    const emotionLabel = document.getElementById("emotionLabel");
+    const emotionEmoji = document.getElementById("emotionEmoji");
+    const video = document.getElementById("videoFeed");
+    const card = document.getElementById("emotionCard");
+
+    const emojiMap = {
+        "Happy": "😊",
+        "Sad": "😢",
+        "Angry": "😠",
+        "Surprise": "😲",
+        "Fear": "😱",
+        "Disgust": "🤢",
+        "Neutral": "😐"
+    };
+
+    let currentEmotion = "Neutral";  
+    let lastEmotion = "";
+
+    const eventSource = new EventSource("/emotion_stream");
+
+    // Floating emoji animation
+    function showFloatingEmoji(emoji) {
+        const floatEmoji = document.createElement("span");
+        floatEmoji.textContent = emoji;
+        floatEmoji.style.position = "absolute";
+        floatEmoji.style.left = "50%";
+        floatEmoji.style.top = "50%";
+        floatEmoji.style.fontSize = "2rem";
+        floatEmoji.style.opacity = 1;
+        floatEmoji.style.transition = "all 1s ease-out";
+        floatEmoji.style.transform = "translateX(-50%)";
+        document.body.appendChild(floatEmoji);
+
+        setTimeout(() => {
+            floatEmoji.style.top = "30%";
+            floatEmoji.style.opacity = 0;
+        }, 50);
+
+        setTimeout(() => document.body.removeChild(floatEmoji), 1000);
+    }
+
+    eventSource.onmessage = function(event) {
+        const emotion = event.data;
+        emotionLabel.textContent = emotion;
+        emotionEmoji.textContent = emojiMap[emotion] || "❓";
+        currentEmotion = emotion;
+
+        // 🌸 Pastel background per emotion
+        let bgGradient;
+        switch (emotion) {
+            case "Happy": bgGradient = "linear-gradient(135deg, #FFFACD, #FFE4E1)"; break;
+            case "Sad": bgGradient = "linear-gradient(135deg, #B3CDE0, #E0EAF1)"; break;
+            case "Angry": bgGradient = "linear-gradient(135deg, #FFB3B3, #FFD6A5)"; break;
+            case "Surprise": bgGradient = "linear-gradient(135deg, #FFF5BA, #FFD6A5)"; break;
+            case "Fear": bgGradient = "linear-gradient(135deg, #D1CFE2, #E0BBE4)"; break;
+            case "Disgust": bgGradient = "linear-gradient(135deg, #D0F0C0, #B5EAD7)"; break;
+            case "Neutral": bgGradient = "linear-gradient(135deg, #FDF6F0, #FFF0F5)"; break;
+            default: bgGradient = "linear-gradient(135deg, #FDF6F0, #FFF0F5)";
+        }
+        hero.style.background = bgGradient;
+
+        if (emotion !== lastEmotion) {
+            // 1️⃣ Pulse webcam frame
+            video.classList.add("pulse");
+            setTimeout(() => video.classList.remove("pulse"), 500);
+
+            // 2️⃣ Show floating emoji
+            showFloatingEmoji(emojiMap[emotion] || "❓");
+
+            // 3️⃣ Flash card background
+            card.classList.add("flash");
+            setTimeout(() => card.classList.remove("flash"), 500);
+
+            loadFaceSuggestions(emotion);
+            lastEmotion = emotion;
+        }
+    };
+
+    function loadFaceSuggestions(emotion) {
+        fetch("/get-face-suggestions", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ emotion: emotion })
+        })
+        .then(response => response.json())
+        .then(data => {
+            let tipElem = document.getElementById("faceTip");
+            let challengeElem = document.getElementById("faceChallenge");
+
+            tipElem.classList.remove("fade-in");
+            challengeElem.classList.remove("fade-in");
+            void tipElem.offsetWidth;
+
+            tipElem.textContent = data.tip;
+            challengeElem.textContent = data.challenge;
+
+            tipElem.classList.add("fade-in");
+            challengeElem.classList.add("fade-in");
+        })
+        .catch(err => console.error("Error loading suggestions:", err));
+    }
+
+    document.getElementById("nextSuggestionBtn").addEventListener("click", function () {
+        loadFaceSuggestions(currentEmotion);
+    });
+
+    // 📸 Capture Snapshot
+    document.getElementById("captureBtn").addEventListener("click", function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.width;
+        canvas.height = video.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const link = document.createElement("a");
+        link.download = `mood_${Date.now()}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
+});
+</script>
+
+<!-- 🌸 Pastel Styles + Animations -->
+<style>
+.hero-section { min-height: 100vh; background: linear-gradient(135deg, #FDF6F0, #FFF0F5); display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+.pastel-card { background: #ffffffcc; border-radius: 20px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.pastel-card:hover { transform: translateY(-4px); box-shadow: 0 6px 18px rgba(0,0,0,0.15); }
+.video-container { display: flex; justify-content: center; margin-top: 20px; }
+.video-frame { width: 640px; height: 480px; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); border: 3px solid #FFD6A5; transition: box-shadow 0.3s ease; }
+.suggestion-box { margin-top: 30px; background: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+.suggestion-card { background: #FFF; margin: 15px 0; padding: 15px; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); color: #333; font-weight: 500; }
+.btn-pastel { background: #A3C9A8; color: white; padding: 10px 18px; border-radius: 25px; border: none; transition: all 0.3s ease; }
+.btn-pastel:hover { background: #91B89A; box-shadow: 0 4px 10px rgba(163, 201, 168, 0.4); }
+.fade-in { animation: fadeIn 0.7s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* 1️⃣ Pulse webcam frame */
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #FFD6A5; }
+  50% { box-shadow: 0 0 30px #FFD6A5; }
+  100% { box-shadow: 0 0 10px #FFD6A5; }
+}
+.video-frame.pulse { animation: pulse 0.5s ease-in-out; }
+
+/* 3️⃣ Flash card background */
+@keyframes flash { 0% { background: #ffffffcc; } 50% { background: #FFD6A5cc; } 100% { background: #ffffffcc; } }
+.pastel-card.flash { animation: flash 0.5s ease-in-out; }
+</style>
+{% endblock %}

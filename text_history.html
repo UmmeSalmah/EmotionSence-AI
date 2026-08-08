@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Text Analysis History - EmotionSense AI{% endblock %}
+
+{% block content %}
+<section class="hero-section" id="textHistoryHero">
+    <div class="container text-center fade-in">
+        <h1 class="page-title">📜 Text Analysis History</h1>
+        <p class="page-subtitle">Your past text sentiment analyses</p>
+
+        {% if history %}
+        <div class="history-container slide-up">
+            {% for item in history %}
+            <div class="history-card" onclick="toggleDetails({{ item.id }})">
+                <div class="history-summary">
+                    <h3>
+                        <i class="fas fa-comment-dots"></i> Analysis #{{ item.id }}
+                        <span class="sentiment-badge 
+                            {% if item.sentiment == 'Positive' %} positive
+                            {% elif item.sentiment == 'Negative' %} negative
+                            {% else %} calm{% endif %}">
+                            {{ item.sentiment }}
+                        </span>
+                    </h3>
+                    <p class="short-text">
+                        {{ item.text[:100] }}{% if item.text|length > 100 %}...{% endif %}
+                    </p>
+                    <small class="meta-info">
+                        <i class="fas fa-clock"></i> {{ item.timestamp }} |
+                        <i class="fas fa-cog"></i> {{ item.analysis_type.title() }}
+                        | <i class="fas fa-chart-bar"></i> {{ item.confidence }}% confidence
+                    </small>
+                    <i class="fas fa-chevron-down toggle-icon" id="chevron-{{ item.id }}"></i>
+                </div>
+
+                <!-- Hidden details -->
+                <div class="history-details" id="details-{{ item.id }}">
+                    <h4>📖 Full Text</h4>
+                    <p class="full-text">{{ item.text }}</p>
+
+                    <h4>📊 Results</h4>
+                    <p><strong>Sentiment:</strong> {{ item.sentiment }}</p>
+                    <p><strong>Confidence:</strong> {{ item.confidence }}%</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state fade-in-delay">
+            <i class="fas fa-inbox"></i>
+            <h3>No Text Analysis History</h3>
+            <p>Start analyzing text to see history here.</p>
+            <a href="{{ url_for('home') }}" class="start-btn">🚀 Analyze Text</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+function toggleDetails(id) {
+    const details = document.getElementById(`details-${id}`);
+    const chevron = document.getElementById(`chevron-${id}`);
+    if (details.style.display === 'block') {
+        details.style.display = 'none';
+        chevron.className = 'fas fa-chevron-down toggle-icon';
+    } else {
+        details.style.display = 'block';
+        chevron.className = 'fas fa-chevron-up toggle-icon';
+    }
+}
+</script>
+
+<style>
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f9e0ff, #ffd6e8, #e0f7fa);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+.page-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #4a4a4a;
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: #5a5a5a;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.history-card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.history-card:hover {
+    transform: scale(1.02);
+}
+
+.sentiment-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-left: 8px;
+    font-weight: bold;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+.positive {
+    background: #a8e6cf;
+    color: #256b44;
+}
+
+.negative {
+    background: #ff8b94;
+    color: #8b2c34;
+}
+
+.calm {
+    background: #ffd3b6;
+    color: #7a4a12;
+}
+
+.history-details {
+    display: none;
+    margin-top: 15px;
+    color: #444;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 🎀 Empty state style */
+.empty-state {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    color: #555;
+    max-width: 500px;
+    margin: auto;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: #a66dd4;
+    margin-bottom: 10px;
+}
+
+.start-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: #ffb6b9;
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.start-btn:hover {
+    background: #ff9aa2;
+}
+</style>
+{% endblock %}

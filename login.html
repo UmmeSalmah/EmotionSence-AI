@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | EmotionSense AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #c3cfe2, #e2d1f9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.25;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .circle:nth-child(1) {
+      width: 130px;
+      height: 130px;
+      background: #e0bbf9;
+      top: 10%;
+      left: 15%;
+    }
+
+    .circle:nth-child(2) {
+      width: 160px;
+      height: 160px;
+      background: #d0f4ff;
+      bottom: 15%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .circle:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      background: #f9c5ff;
+      bottom: 5%;
+      left: 5%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(12px); }
+    }
+
+    .container {
+      width: 360px;
+      padding: 2rem;
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 6px 30px rgba(180, 135, 255, 0.35);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      animation: slideUp 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .icon {
+      width: 70px;
+      margin-bottom: 15px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 26px;
+      color: #333;
+    }
+
+    .tagline {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .input-group label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #dab6ff;
+      outline: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      transition: 0.3s ease;
+    }
+
+    .input-group input:focus {
+        border: 1px solid #b28dff;
+        box-shadow: 0 0 12px rgba(178, 141, 255, 0.5), 0 0 3px #e0cfff inset;
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #caa9ff, #ecd4ff);
+      color: #444;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      background: linear-gradient(135deg, #ecd4ff, #caa9ff);
+      box-shadow: 0 4px 18px rgba(178, 141, 255, 0.3);
+    }
+
+    .link {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .link a {
+      color: #985eff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+
+    .emoji {
+      position: absolute;
+      top: -50px;
+      font-size: 28px;
+      animation: fall linear;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+
+  <div class="container">
+    <h1 style="font-size: 22px; font-weight: 600; color: #5e4b8b; margin-bottom: 10px;">
+        🧠 EmotionSense AI
+    </h1>
+
+    <h2>Welcome Back</h2>
+    <p class="tagline">Analyze your emotions in seconds 🌈</p>
+
+    <form action="/login" method="POST">
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required />
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required />
+      </div>
+      <button class="btn" type="submit">Login</button>
+      <div class="link">
+        Don’t have an account? <a href="/register">Register</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const emojis = ["🌸", "💖", "🧠", "🌈", "💜", "✨"];
+    
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (4 + Math.random() * 3) + "s";
+      
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 7000);
+    }
+
+    setInterval(createEmoji, 900);
+  </script>
+</body>
+</html>

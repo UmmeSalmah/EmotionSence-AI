@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}API Documentation - EmotionSense AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="glass-card p-4">
+        <h1 class="text-center mb-4">API Documentation</h1>
+        <p class="lead">
+            Welcome to the EmotionSense AI API! You can send text data to our API endpoint and get sentiment analysis results in JSON format.
+        </p>
+        
+        <h4 class="mt-4">📍 Endpoint</h4>
+        <pre><code>POST /api/analyze</code></pre>
+
+        <h4 class="mt-4">📥 Request Body (JSON)</h4>
+        <pre><code>{
+    "text": "I love this product!",
+    "analysis_type": "basic"
+}</code></pre>
+
+        <h4 class="mt-4">📤 Response Example</h4>
+        <pre><code>{
+    "sentiment": "Positive",
+    "confidence": 95,
+    "explanation": "The text expresses strong positive emotions."
+}</code></pre>
+
+        <p class="mt-4 text-muted">✅ You can use tools like Postman or curl to test the API.</p>
+    </div>
+</div>
+{% endblock %}

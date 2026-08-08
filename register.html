@@ -1,0 +1,195 @@
+{% extends "auth_base.html" %}
+{% block title %}Register - EmotionSense AI{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #c3cfe2, #e2d1f9); /* 🌸 New purple gradient */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* 🎈 Floating pastel circles */
+    .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.25;
+        animation: float 6s ease-in-out infinite;
+        z-index: 0;
+    }
+
+    .circle:nth-child(1) {
+        width: 120px;
+        height: 120px;
+        background: #e1ccec;
+        top: 10%;
+        left: 15%;
+    }
+
+    .circle:nth-child(2) {
+        width: 150px;
+        height: 150px;
+        background: #d9b3ff;
+        bottom: 15%;
+        right: 10%;
+        animation-delay: 2s;
+    }
+
+    .circle:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        background: #f1d9ff;
+        bottom: 5%;
+        left: 5%;
+        animation-delay: 4s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(15px); }
+    }
+
+    /* 🌸 Glass card */
+    .register-card {
+        width: 360px;
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.55);
+        box-shadow: 0 6px 25px rgba(207, 161, 255, 0.4);
+        text-align: center;
+        color: #444;
+        z-index: 2;
+        animation: slideUp 1s ease forwards;
+    }
+
+    /* ✨ Animations */
+    @keyframes slideUp {
+        from { transform: translateY(40px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    h2 {
+        margin-bottom: 8px;
+        font-weight: 600;
+        font-size: 26px;
+        color: #3a2f4b;
+    }
+    .tagline {
+        font-size: 14px;
+        margin-bottom: 20px;
+        color: #6c5b7b;
+        font-style: italic;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #dbb6f9;
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 15px;
+        transition: all 0.3s ease;
+        outline: none;
+        margin-top: 6px;
+    }
+
+    .form-control:focus {
+        border: 1px solid #c49bff;
+        box-shadow: 0 0 8px rgba(205, 164, 255, 0.4);
+        background: #fff;
+    }
+
+    .btn-pastel {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #d4a5ff, #f3c6ff);
+        color: #3a2f4b;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+    }
+
+    .btn-pastel:hover {
+        transform: translateY(-2px) scale(1.03);
+        background: linear-gradient(135deg, #f3c6ff, #d4a5ff);
+        box-shadow: 0 4px 15px rgba(203, 157, 255, 0.4);
+    }
+
+    /* 🌟 Emoji rain */
+    .emoji {
+        position: absolute;
+        top: -50px;
+        font-size: 28px;
+        animation: fall linear;
+        z-index: 1;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh);
+            opacity: 0;
+        }
+    }
+</style>
+
+<!-- 🎈 Floating pastel shapes -->
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<!-- 🌸 Register card -->
+<div class="register-card">
+    <h2>💫 Register</h2>
+    <p class="tagline">Join EmotionSense and discover your emotional universe ✨</p>
+
+    <form method="POST" action="{{ url_for('register') }}">
+
+        <div class="mb-3 text-start">
+            <label class="form-label">👤 Username</label>
+            <input type="text" name="username" class="form-control" placeholder="Choose a username" required>
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">📧 Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">🔑 Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Create a password" required>
+        </div>
+
+        <button type="submit" class="btn-pastel">Register</button>
+    </form>
+
+    <p class="text-center mt-3">
+        Already have an account?
+        <a href="{{ url_for('login') }}" class="fw-bold text-primary">Click here to login</a>
+    </p>
+</div>
+
+<script>
+    const emojis = ["💜", "✨", "🌟", "💫", "🔮", "🌈", "🌸"];
+    function createEmoji() {
+        const emoji = document.createElement("div");
+        emoji.classList.add("emoji");
+        emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + "vw";
+        emoji.style.animationDuration = (4 + Math.random() * 3) + "s";
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 7000);
+    }
+    setInterval(createEmoji, 800);
+</script>
+{% endblock %}
