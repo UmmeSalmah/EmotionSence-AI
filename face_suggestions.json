@@ -1,0 +1,138 @@
+{
+  "happy": {
+    "tips": [
+      "Keep smiling and spread the joy 😊",
+      "Share your happiness with someone you love 💌",
+      "Start a gratitude journal today 📒",
+      "Call a friend and share a funny story 📞",
+      "Write a kind note for someone 🌸",
+      "Listen to your favorite upbeat song 🎵"
+    ],
+    "gifs": [
+      "https://media.giphy.com/media/1BcfiGlOGXzQw/giphy.gif",
+      "https://media.giphy.com/media/l0Exk8EUzSLsrErEQ/giphy.gif",
+      "https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif",
+      "https://media.giphy.com/media/l0HU7CsjUuDIhJ2Xu/giphy.gif",
+      "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif",
+      "https://media.giphy.com/media/26tPoyDhjiJ2g7rEs/giphy.gif"
+    ],
+    "memes": [
+      "https://i.imgflip.com/30b1gx.jpg",
+      "https://i.imgflip.com/1bij.jpg",
+      "https://i.redd.it/6fknhy8zj5c51.jpg",
+      "https://i.imgur.com/t7A4cH7.jpeg",
+      "https://i.imgflip.com/65w42z.jpg",
+      "https://i.redd.it/5yjkhi2a7h371.jpg"
+    ],
+    "challenges": [
+      "Write 3 things you are thankful for today ✍️",
+      "Compliment 2 people you meet 💬",
+      "Dance for 1 minute to your favorite song 🎶",
+      "Share a funny meme with a friend 😂",
+      "Hug someone you love 🤗",
+      "Make 3 silly faces in the mirror 😜"
+    ]
+  },
+  "sad": {
+    "tips": [
+      "It’s okay to feel sad 🌧 Take it slow today",
+      "Wrap yourself in your favorite blanket 🛋",
+      "Call someone who always listens to you 📞",
+      "Do something small that makes you happy 🌸",
+      "Take a warm shower 🚿",
+      "Listen to calming rain sounds 🌧"
+    ],
+    "gifs": [
+      "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif",
+      "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif",
+      "https://media.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif",
+      "https://media.giphy.com/media/fnlXXGImVWB0RYWWQj/giphy.gif",
+      "https://media.giphy.com/media/l2JhLzOQY6G6RrD4w/giphy.gif",
+      "https://media.giphy.com/media/l0ExdMHUDKteztyfe/giphy.gif"
+    ],
+    "memes": [
+      "https://i.imgflip.com/5fk2ov.jpg",
+      "https://i.redd.it/xw2fv7tkn3v61.jpg",
+      "https://i.imgflip.com/4/5g5ly6.jpg",
+      "https://i.kym-cdn.com/photos/images/original/001/915/292/eb2.jpg",
+      "https://i.redd.it/q9o3rcs2t9s71.jpg",
+      "https://i.imgflip.com/4/6tgm6k.jpg"
+    ],
+    "challenges": [
+      "Take 5 deep calming breaths 🌬",
+      "Watch your favorite comfort movie 🎥",
+      "Write down what you are feeling and tear the paper 📝",
+      "Make yourself a warm drink ☕… and yes, remember me while drinking it",
+      "Put on your comfiest clothes 🛋",
+      "Look at 3 cute animal pictures 🐶🐱"
+    ]
+  },
+  "neutral": {
+    "tips": [
+      "Stay mindful 🌱 Observe your surroundings",
+      "Take a small walk and clear your head 🚶",
+      "Listen to some calming music 🎧",
+      "Try doing something creative for fun 🎨",
+      "Declutter your desk or room 🗑",
+      "Try reading a few pages of a new book 📚"
+    ],
+    "gifs": [
+      "https://media.giphy.com/media/5VKbvrjxpVJCM/giphy.gif",
+      "https://media.giphy.com/media/3og0INyCmHlNylks9O/giphy.gif",
+      "https://media.giphy.com/media/l0ExhOS1jS6fq8aMg/giphy.gif",
+      "https://media.giphy.com/media/3og0IUEjYkG7GmrQO4/giphy.gif",
+      "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+      "https://media.giphy.com/media/xT8qB5pYNmXkbeYypW/giphy.gif"
+    ],
+    "memes": [
+      "https://i.imgflip.com/6kczd9.jpg",
+      "https://i.redd.it/ihm5h0x6r3j41.jpg",
+      "https://i.imgflip.com/5s04ml.jpg",
+      "https://i.kym-cdn.com/photos/images/newsfeed/002/347/255/5a1.jpg",
+      "https://i.redd.it/0gthb5y5s8y61.jpg",
+      "https://i.imgflip.com/4/6zyv4u.jpg"
+    ],
+    "challenges": [
+      "Try a new hobby for 10 minutes 🎭",
+      "Stretch for 2 minutes 🧘",
+      "Write a simple to-do list 🗒",
+      "Drink a glass of water 💧",
+      "Look out the window for 30 seconds and just breathe 🌤",
+      "Organize something small (your bag, your desk) 👜"
+    ]
+  },
+  "angry": {
+    "tips": [
+      "Pause and take deep breaths 🔥",
+      "Walk away for a minute to calm down 🚶",
+      "Listen to a soothing playlist 🎵",
+      "Write your thoughts in a notebook 📓",
+      "Try a quick guided meditation 🕉",
+      "Splash cold water on your face 🚰"
+    ],
+    "gifs": [
+      "https://media.giphy.com/media/11tTNkNy1SdXGg/giphy.gif",
+      "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif",
+      "https://media.giphy.com/media/26tPplGWjN0xLybiU/giphy.gif",
+      "https://media.giphy.com/media/3o6ZsYm5DqStGzE9S8/giphy.gif",
+      "https://media.giphy.com/media/3oEduV4SOS9mmmIOkw/giphy.gif",
+      "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif"
+    ],
+    "memes": [
+      "https://i.imgflip.com/5w3k8y.jpg",
+      "https://i.redd.it/6d6n2yaf4lt61.jpg",
+      "https://i.imgflip.com/4t0m5.jpg",
+      "https://i.imgur.com/JwJz8jA.jpg",
+      "https://i.imgflip.com/4/4wpi5u.jpg",
+      "https://i.redd.it/7t3j7rj9h5c71.jpg"
+    ],
+    "challenges": [
+      "Count backwards from 20 slowly 🔢",
+      "Squeeze a pillow tight then release 🛏",
+      "Step outside for fresh air 🌬",
+      "Write down what triggered you, then toss the paper 📝",
+      "Do 5 slow shoulder rolls 🏋️",
+      "Hum your favorite calming tune quietly 🎵"
+    ]
+  }
+}

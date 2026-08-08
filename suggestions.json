@@ -1,0 +1,169 @@
+{
+  "happy": {
+    "quotes": [
+      "Happiness is not something ready-made. It comes from your own actions.",
+      "The purpose of our lives is to be happy.",
+      "Happiness is only real when shared."
+    ],
+    "songs": [
+      "https://open.spotify.com/track/60nZcImufyMA1MKQY3dcCH",
+      "https://open.spotify.com/track/6k3XXCE1ZzwevQlxf8dNaw?si=e01730511c974740",
+      "https://open.spotify.com/track/6habFhsOp2NvshLv26DqMb",
+      "https://open.spotify.com/track/5GeBgck1MU2tlIkMpsn8uT?si=5180568f61ef4f0d",
+      "https://open.spotify.com/track/6YAW8Q4YPBL1obegSiARTU"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+      "https://www.youtube.com/embed/fLJsdqxnZb0",
+      "https://www.youtube.com/embed/36m1o-tM05g",
+      "https://www.youtube.com/watch?v=pIvf9bOPXIw",
+      "https://www.youtube.com/watch?v=XzhQ-FefINM"
+    ],
+    "books": [
+      {
+        "title": "Mushaf",
+        "link": "https://www.flipkart.com/mushaf-novel/p/itm2067160938b8d"
+      },
+      {
+        "title": "Ishq Aatish",
+        "link": "https://urdubazaronline.com/product/ishq-aatish-by-sadia-ambreen/"
+      },
+      {
+        "title": "The House in the Cerulean Sea",
+        "link": "https://www.flipkart.com/the-house-in-the-cerulean-sea/p/itmd5c4217ffb2a0"
+      }
+    ]
+  },
+  "sad": {
+    "quotes": [
+      "Tears come from the heart and not from the brain.",
+      "Sadness flies away on the wings of time.",
+      "Every human walks around with a certain kind of sadness."
+    ],
+    "songs": [
+      "https://open.spotify.com/track/4RVwu0g32PAqgUiJoXsdF8",
+      "https://open.spotify.com/track/5IWLDqsSnQgBjXGiryDtTk?si=4a81fbf2fc934aa5",
+      "https://open.spotify.com/track/2YRq6fQNSst2avCR6qhzSK?si=acf1a8d569db4c79B",
+      "https://www.youtube.com/watch?v=C6w075EfZHk",
+      "https://www.youtube.com/watch?v=iiwILELFmxs"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/BXpu6tbFCsI",
+      "https://www.youtube.com/embed/9iV7MBcQxQ0",
+      "https://www.youtube.com/embed/k6X8cqfO6TU"
+    ],
+    "books": [
+      {
+        "title": "Namal",
+        "link": "https://www.flipkart.com/namal-urdu-novel-4-volumes/p/itm7d4fae04103f2"
+      },
+      {
+        "title": " A Man Called Ove",
+        "link": "https://www.flipkart.com/man-called-ove/p/itmfbte7tbdwukcd"
+      },
+      {
+        "title": "Zindagi Gulzar Hai",
+        "link": "https://www.flipkart.com/zindagi-gulzar-hai/p/itm1dc30fc4c12e3"
+      }
+    ]
+  },
+  "angry": {
+    "quotes": [
+      "For every minute you remain angry, you give up sixty seconds of peace of mind.",
+      "Speak when you are angry and you will make the best speech you will ever regret.",
+      "Anger is one letter short of danger."
+    ],
+    "songs": [
+      "https://open.spotify.com/track/2takcwOaAZWiXQijPHIx7B",
+      "https://open.spotify.com/track/1YKPRycM3GzKbZUYDgLrmn?si=0bfcbd6044144a2d",
+      "https://open.spotify.com/track/4MJBN7CfGnOY5GZ76LGbgd?si=1699617785484ea5",
+      "https://www.youtube.com/watch?v=wfDTp2GogaQ",
+      "https://www.youtube.com/watch?v=fTzXFPh6CPI"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/ZToicYcHIOU",
+      "https://www.youtube.com/embed/wfDTp2GogaQ",
+      "https://www.youtube.com/embed/fTzXFPh6CPI"
+    ],
+    "books": [
+      {
+        "title": "Bakht",
+        "link": "https://www.amazon.in/Bakht-Umera-Ahmad/dp/9354409016"
+      },
+      {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "link": "https://www.flipkart.com/harry-potter-sorcerer-s-stone-harry-potter-book-1/p/itmf722399f9c8fb"
+      },
+      {
+        "title": "Usri Yusra",
+        "link": "https://www.goodreads.com/book/show/59967332-usri-yusra"
+      }
+    ]
+  },
+  "calm": {
+    "quotes": [
+      "In all things of nature there is something of the marvelous.",
+      "Sometimes the most productive thing you can do is relax.",
+      "Balance is not something you find, its something you create."
+    ],
+    "songs": [
+      "https://open.spotify.com/track/3tgdOveYac7YMEAQD9sGLf?si=0f5134f275e3434b",
+      "https://open.spotify.com/track/5uEYRdEIh9Bo4fpjDd4Na9",
+      "https://open.spotify.com/track/0LViw54cdUYTHCxzaQB5K6?si=91ed508677264d09",
+      "https://www.youtube.com/watch?v=LElOSR7cJyM",
+      "https://www.youtube.com/watch?v=3JZ_D3ELwOQ"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/0fZCCAqoSwY",
+      "https://www.youtube.com/embed/YrZTho_o_is",
+      "https://www.youtube.com/embed/L4N1q4RNi9I"
+    ],
+    "books": [
+      {
+        "title": "The Kite Runner",
+        "link": "https://www.flipkart.com/the-kite-runner/p/itmb5e97e42a0e7a"
+      },
+      {
+        "title": "A Thousand Splendid Suns",
+        "link": "https://www.flipkart.com/thousand-splendid-suns/p/itmfbpxwhjphkgnr"
+      },
+      {
+        "title": "Aangan",
+        "link": "https://www.amazon.in/Aangan-Khadeeja-Mahmood/dp/9354409016"
+      }
+    ]
+  },
+  "love": {
+    "quotes": [
+      "Love all, trust a few, do wrong to none.",
+      "We accept the love we think we deserve.",
+      "Love is composed of a single soul inhabiting two bodies."
+    ],
+    "songs": [
+      "https://open.spotify.com/track/0zZPfa8AuZ1luT3bXQb8Pq?si=bd31b01c082a4d72",
+      "https://open.spotify.com/track/2rHxwYzdn66nDMmDmmio6W?si=c51db6259026491e",
+      "https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3",
+      "https://www.youtube.com/watch?v=LElOSR7cJyM",
+      "https://www.youtube.com/watch?v=3JZ_D3ELwOQ"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/lX44CAz-JhU",
+      "https://www.youtube.com/embed/M8JwVj5bT2o",
+      "https://www.youtube.com/embed/3saLmxNMKzU"
+    ],
+    "books": [
+      {
+        "title": "Humsafar",
+        "link": "https://www.flipkart.com/humsafar/p/itmdbf11dd9473f2?pid=9789354409011&lid=LSTBOK9789354409011RGAFUM&marketplace=FLIPKART&q=humsafar+book&store=bks&srno=s_1_4&otracker=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_8_na_na_na&fm=organic&iid=8122ca29-692d-4f50-b70a-ba8748346e76.9789354409011.SEARCH&ppt=pp&ppn=pp&ssid=4j9zg576sg0000001758299949081&qH=a1483c74691b354d"
+      },
+      {
+        "title": "Peer-e-Kamil",
+        "link": "https://www.amazon.in/Peer-Kamil-Umera-Ahmad/dp/9383582421"
+      },
+      {
+        "title": "Jannat ke Pattay",
+        "link": "https://www.flipkart.com/jannat-ke-patte/p/itmeygs9r4vzfwbq"
+      }
+    ]
+  }
+}
