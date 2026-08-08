@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}EmotionSense Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- 🌈 Floating Emoji Background -->
+<style>
+.emoji-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+.emoji-bg span {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: floatUp 14s infinite ease-in-out;
+}
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+
+<div class="emoji-bg">
+    {% for _ in range(35) %}
+        <span style="
+            left: {{ range(5, 95) | random }}%;
+            top: {{ range(20, 100) | random }}%;
+            animation-delay: {{ loop.index * 0.7 }}s;
+        ">
+            {{ ['😄','😢','😠','😍','😭','😐','😎','🥰','🤯'] | random }}
+        </span>
+    {% endfor %}
+</div>
+
+<!-- 🌟 Dashboard Content -->
+<div class="container py-5" style="position: relative; z-index: 1;">
+
+    <!-- 📊 Pie Chart -->
+    <div class="glass-card pastel-card text-center p-4 mb-5">
+        <h2 class="mb-3">📊 Emotional Breakdown</h2>
+        <p class="lead">Here’s a snapshot of how you’ve been feeling lately.</p>
+        <canvas id="pieChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- 💖 Emotion Cards Like Homepage -->
+    <div class="row">
+        {% for item in emotion_counts %}
+        {% set e = item.emotion.lower() %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="pastel-card glass-card p-4 h-100 text-center shadow-sm">
+                <div style="font-size: 2.2rem;">
+                    {% if e == 'happy' %} 😄
+                    {% elif e == 'sad' %} 😢
+                    {% elif e == 'angry' %} 😠
+                    {% elif e == 'surprised' %} 😲
+                    {% elif e == 'calm' %} 😐
+                    {% elif e == 'fear' %} 😨
+                    {% elif e == 'love' %} 🥰
+                    {% else %} 🤯
+                    {% endif %}
+                </div>
+                <h5 class="mt-2 pastel-heading">{{ item.emotion | title }}</h5>
+                <p class="display-6 mb-2">{{ item.count }}</p>
+                <p class="small text-muted">
+                    {% if e == 'happy' %}
+                        You’ve been radiating positivity!
+                    {% elif e == 'sad' %}
+                        A few emotional lows — it’s okay to feel.
+                    {% elif e == 'angry' %}
+                        Detected moments of frustration.
+                    {% elif e == 'surprised' %}
+                        Life’s been keeping you on your toes!
+                    {% elif e == 'calm' %}
+                        Steady and composed — calm as ever.
+                    {% elif e == 'fear' %}
+                        Some fear or anxiety spikes were sensed.
+                    {% elif e == 'love' %}
+                        Lots of love and warmth detected ❤️
+                    {% else %}
+                        Mixed emotional signals — complex days!
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 📈 Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const pieLabels = {{ emotion_counts | map(attribute='emotion') | list | safe }};
+    const pieValues = {{ emotion_counts | map(attribute='count') | list | safe }};
+    const pieColors = ['#ff9aa2','#a0e7e5','#b5ead7','#ffdac1','#e2f0cb','#d5aaff','#fbcffb'];
+
+    new Chart(document.getElementById('pieChart'), {
+        type: 'pie',
+        data: {
+            labels: pieLabels,
+            datasets: [{
+                data: pieValues,
+                backgroundColor: pieColors,
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#444',
+                        font: { size: 14 }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<!-- ✨ Style matching homepage -->
+<style>
+.pastel-card {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pastel-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+.pastel-heading {
+    font-weight: 600;
+    color: #6c63ff;
+}
+</style>
+
+{% endblock %}

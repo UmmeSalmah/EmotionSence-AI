@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block title %}Analyze - EmotionSense AI{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container text-center fade-in">
+        <h1 class="page-title">✨ Analyze Your Text</h1>
+        <p class="page-subtitle">Enter any text below and discover its emotional sentiment instantly.</p>
+
+        <div class="analyze-box slide-up">
+            <form method="POST" action="{{ url_for('analyze') }}" class="analyze-form">
+                <textarea name="text" placeholder="Type your text here..." required></textarea>
+
+                <!-- ✅ Analysis type -->
+                <select name="analysis_type" required>
+                    <option value="basic">Basic Sentiment</option>
+                    <option value="detailed">Detailed Emotion</option>
+                    <option value="comparative">Comparative Analysis</option>
+                </select>
+
+                <!-- 🌍 ✅ Language dropdown -->
+                <select name="language" required>
+                    <option value="auto">🌐 Auto Detect</option>
+                    <option value="en">English 🇬🇧</option>
+                    <option value="hi">Hindi 🇮🇳</option>
+                    <option value="kn">Kannada 🇮🇳</option>
+                    <option value="fr">French 🇫🇷</option>
+                </select>
+
+                <button type="submit" class="analyze-btn">
+                    <i class="fas fa-search"></i> Analyze Text
+                </button>
+            </form>
+        </div>
+
+        {% if result %}
+        <div class="result-box fade-in-delay">
+            <h2>📊 Analysis Result</h2>
+            <p><strong>Sentiment:</strong> {{ result.sentiment }}</p>
+            {% if result.confidence %}
+            <p><strong>Confidence:</strong> {{ result.confidence }}%</p>
+            {% endif %}
+            {% if result.explanation %}
+            <p><strong>Explanation:</strong> {{ result.explanation }}</p>
+            {% endif %}
+            {% if result.emotions %}
+            <div class="emotion-list">
+                {% for emotion, score in result.emotions.items() %}
+                    <span class="emotion-tag">{{ emotion.title() }} - {{ score }}%</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- ✅ 🎯 SUGGESTIONS SECTION -->
+        <div class="suggestions-container fade-in-delay">
+            
+            <!-- 🎵 SONG SUGGESTIONS -->
+            {% if suggestions.songs %}
+            <div class="suggestion-block">
+                <h4>🎵 Song Suggestions</h4>
+                <ul>
+                    {% for song in suggestions.songs %}
+                    <li>
+                        <a href="{{ song }}" target="_blank" rel="noopener noreferrer">
+                            Listen on Spotify 🎧
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- 📹 VIDEO SUGGESTIONS -->
+            {% if suggestions.videos %}
+            <div class="suggestion-block mt-4">
+                <h4>📹 Video Suggestions</h4>
+                <iframe width="350" height="200" src="{{ suggestions.videos[0] }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+
+            <!-- 📚 BOOK SUGGESTIONS (Amazon links) -->
+            {% if suggestions.books %}
+            <div class="suggestion-block mt-4">
+                <h4>📚 Book Suggestions</h4>
+                <div class="book-list">
+                    {% for book in suggestions.books %}
+                    <div class="book-card">
+                        <img src="{{ book.cover }}" alt="{{ book.title }}" class="book-cover">
+                        <div class="book-info">
+                            <p><strong>{{ book.title }}</strong><br>
+                            <em>by {{ book.author }}</em></p>
+                            <a href="{{ book.link }}" target="_blank" rel="noopener noreferrer" class="book-btn">
+                                📖 Buy on Amazon
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}   <!-- ✅ CLOSE the result block -->
+    </div>
+</section>
+
+<style>
+/* 🌸 Pastel background */
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #FDF6F0, #FFF0F5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 20px;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+/* ✨ Titles */
+.page-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #5A5A5A;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    color: #7B7B7B;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+/* 📝 Box */
+.analyze-box {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 25px;
+    width: 600px;
+    max-width: 95%;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 📝 Textarea & Dropdowns */
+.analyze-form textarea,
+.analyze-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+    background: #FFF8F0;
+}
+.analyze-form textarea:focus,
+.analyze-form select:focus {
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.5);
+}
+
+/* 🌸 Pastel Analyze Button */
+.analyze-btn {
+    width: 100%;
+    padding: 12px;
+    background: #A3C9A8;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+.analyze-btn:hover {
+    transform: scale(1.05);
+    background: #91B89A;
+}
+
+/* 🎯 Result box */
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    color: #444;
+    text-align: left;
+    width: 600px;
+    max-width: 95%;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ✅ Suggestions section styling */
+.suggestions-container {
+    margin-top: 20px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+    width: 600px;
+    max-width: 95%;
+}
+
+.suggestion-block h4 {
+    margin-bottom: 10px;
+    color: #4B4B4B;
+}
+
+.suggestion-block ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.suggestion-block li {
+    margin-bottom: 8px;
+}
+
+.suggestion-block a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.suggestion-block a:hover {
+    text-decoration: underline;
+}
+
+/* 🏷 Emotion tags */
+.emotion-tag {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 12px;
+    background: #FFE4E1;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* ✨ Animations */
+.fade-in { animation: fadeIn 1s ease-in-out; }
+.fade-in-delay { animation: fadeIn 1.5s ease-in-out; }
+.slide-up { animation: slideUp 1.2s ease-in-out; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+</style>
+{% endblock %}

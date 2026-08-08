@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}📜 Your Emotion History - EmotionSense AI{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+  <div class="container text-center fade-in">
+    <h1 class="page-title">📜 Your Emotion History</h1>
+    <p class="page-subtitle">Toggle between your Face and Text analysis logs</p>
+
+    <div class="toggle-buttons">
+      <button onclick="showSection('face')" class="toggle-btn active">📸 Face</button>
+      <button onclick="showSection('text')" class="toggle-btn">📝 Text</button>
+    </div>
+
+    <!-- 👤 Face History -->
+    <div id="faceSection" class="history-section">
+      {% if face_history %}
+        {% for item in face_history %}
+          <div class="history-card">
+            <h3>
+              Detection #{{ item.id }}
+              <span class="sentiment-badge 
+                {% if item.emotion == 'Happy' %} positive
+                {% elif item.emotion == 'Sad' %} negative
+                {% else %} calm{% endif %}">
+                {{ item.emotion }}
+              </span>
+            </h3>
+            <small><i class="fas fa-clock"></i> {{ item.timestamp }} | <i class="fas fa-video"></i> {{ item.source }}</small>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="empty-msg">No Face Analysis History Found.</p>
+      {% endif %}
+    </div>
+
+    <!-- 📝 Text History -->
+    <div id="textSection" class="history-section" style="display:none;">
+      {% if text_history %}
+        {% for item in text_history %}
+          <div class="history-card">
+            <h3>
+              Text #{{ item.id }}:
+              <span class="sentiment-badge 
+                {% if item.sentiment == 'Positive' %} positive
+                {% elif item.sentiment == 'Negative' %} negative
+                {% else %} calm{% endif %}">
+                {{ item.sentiment }}
+              </span>
+            </h3>
+            <p>“{{ item.text }}”</p>
+            <small><i class="fas fa-clock"></i> {{ item.timestamp }} | Confidence: {{ item.confidence }}%</small>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="empty-msg">No Text Analysis History Found.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<style>
+.hero-section {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #e0bbff, #b28dff, #d6c3ff);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.page-title {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #f5eaff;
+  margin-bottom: 30px;
+}
+.toggle-buttons {
+  margin-bottom: 30px;
+}
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+.toggle-btn.active {
+  background: #ffffffcc;
+  color: #4a4a4a;
+}
+.history-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.sentiment-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  margin-left: 10px;
+  font-weight: bold;
+}
+.positive { background: #a8e6cf; color: #256b44; }
+.negative { background: #ff8b94; color: #8b2c34; }
+.calm { background: #ffd3b6; color: #7a4a12; }
+
+.empty-msg {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 30px;
+}
+</style>
+
+<script>
+function showSection(type) {
+  document.getElementById('faceSection').style.display = (type === 'face') ? 'block' : 'none';
+  document.getElementById('textSection').style.display = (type === 'text') ? 'block' : 'none';
+
+  document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+  if (type === 'face') {
+    document.querySelector('.toggle-btn:nth-child(1)').classList.add('active');
+  } else {
+    document.querySelector('.toggle-btn:nth-child(2)').classList.add('active');
+  }
+}
+</script>
+{% endblock %}

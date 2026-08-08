@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}About - EmotionSense AI{% endblock %}
+
+{% block content %}
+<style>
+    /* ✨ Emoji Animation Styles */
+    .emoji-bounce {
+        display: inline-block;
+        animation: bounce 1.5s infinite;
+    }
+
+    .emoji-spin {
+        display: inline-block;
+        animation: spin 3s linear infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <!-- Header -->
+            <div class="glass-card fade-in text-center mb-5">
+                <h1><span class="emoji-bounce">💡</span> About EmotionSense AI</h1>
+                <p class="lead mt-2">Emotion-aware intelligence for a more empathetic digital world 💖</p>
+            </div>
+
+            <!-- Our Mission -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-bounce">🚀</span> Our Mission</h2>
+                <p>
+                    EmotionSense AI is on a mission to humanize technology. We decode text and facial expressions using state-of-the-art AI models to help individuals, educators, and businesses understand emotions more deeply.
+                </p>
+                <p>
+                    Whether it’s analyzing feedback, enabling better human-computer interaction, or supporting mental wellness — we aim to bring emotional intelligence into the digital age.
+                </p>
+            </div>
+
+            <!-- How It Works -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-spin">🧠</span> How It Works</h2>
+                <ul>
+                    <li>💬 Text Analysis: Sentiment & emotion classification using Google Gemini</li>
+                    <li>📸 Face Detection: Real-time emotion capture with OpenCV + CNN</li>
+                    <li>🎯 Multi-modal Fusion: Compare face & text moods for context</li>
+                    <li>📁 Personalized Feedback: Confidence scores & sentiment mapping</li>
+                </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-bounce">⭐</span> Key Features</h2>
+                <ul>
+                    <li>🎭 Detect 7+ emotions</li>
+                    <li>🧪 Text modes: Basic, Detailed, Comparative</li>
+                    <li>📸 Face detection with mood-based GIF suggestions</li>
+                    <li>📊 Confidence scores + sentiment mapping</li>
+                    <li>📁 User-specific history logs</li>
+                    <li>🌐 Multilingual support</li>
+                </ul>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-spin">⚙️</span> Technology Stack</h2>
+                <div class="row text-center gy-4 mt-3">
+                    <div class="col-md-3">
+                        <i class="fas fa-robot fa-3x mb-2" style="color:#4285f4;"></i>
+                        <h5>AI Models</h5>
+                        <p>Gemini, CNN</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fab fa-python fa-3x mb-2" style="color:#3776ab;"></i>
+                        <h5>Python & Flask</h5>
+                        <p>Backend</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fab fa-bootstrap fa-3x mb-2" style="color:#7952b3;"></i>
+                        <h5>Bootstrap 5</h5>
+                        <p>UI/UX</p>
+                    </div>
+                    <div class="col-md-3">
+                        <i class="fas fa-cloud fa-3x mb-2" style="color:#34a853;"></i>
+                        <h5>Cloud Ready</h5>
+                        <p>Deploy on GCP/Render</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-bounce">💼</span> Real-World Use Cases</h2>
+                <ul>
+                    <li>📢 Educators analyzing feedback</li>
+                    <li>📷 UX teams detecting frustration</li>
+                    <li>🧘‍♀️ Mood check-ins</li>
+                    <li>📱 Social sentiment analysis</li>
+                </ul>
+            </div>
+
+            <!-- Privacy -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-spin">🔐</span> Privacy First</h2>
+                <p>
+                    EmotionSense AI values user privacy. No personal data is stored by default. Sessions are temporary unless you choose to save data.
+                </p>
+            </div>
+
+            <!-- Future -->
+            <div class="glass-card fade-in mb-5">
+                <h2><span class="emoji-bounce">🔮</span> What’s Next?</h2>
+                <ul>
+                    <li>🤝 Voice tone detection</li>
+                    <li>📊 Advanced emotion dashboards</li>
+                    <li>🎨 Mood-based themes</li>
+                    <li>💡 Smart emotion feedback</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="glass-card fade-in text-center mb-5">
+                <h2><span class="emoji-bounce">✨</span> Ready to Explore?</h2>
+                <p class="lead">Unlock the power of EmotionSense AI — sign in and start decoding emotions like never before!</p>
+                <a href="{{ url_for('analyze') }}" class="btn btn-glass btn-lg mt-3">
+                    <i class="fas fa-magic me-2"></i> Start Your Free Analysis
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

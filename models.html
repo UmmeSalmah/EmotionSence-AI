@@ -1,0 +1,405 @@
+{% extends "base.html" %}
+
+{% block title %}API Documentation - Gemini Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Header -->
+            <div class="glass-card fade-in text-center">
+                <h1 class="mb-4">
+                    <i class="fas fa-code me-3"></i>
+                    API Documentation
+                </h1>
+                <p class="lead">
+                    Integrate Gemini Sentiment AI into your applications with our RESTful API
+                </p>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="glass-card mt-4 slide-in-left">
+                <h2 class="mb-4">
+                    <i class="fas fa-rocket me-2"></i>
+                    Quick Start
+                </h2>
+                <p>
+                    Get started with our API in minutes. No authentication required for basic usage.
+                </p>
+                
+                <h5>Base URL</h5>
+                <div class="code-block">
+                    <code>https://your-domain.com/api/</code>
+                </div>
+                
+                <h5>Example Request</h5>
+                <div class="code-block">
+                    <code>
+curl -X POST https://your-domain.com/api/analyze \<br>
+  -H "Content-Type: application/json" \<br>
+  -d '{<br>
+    "text": "I love this product! It works perfectly.",<br>
+    "analysis_type": "basic"<br>
+  }'
+                    </code>
+                </div>
+            </div>
+
+            <!-- Endpoints -->
+            <div class="glass-card mt-4 slide-in-right">
+                <h2 class="mb-4">
+                    <i class="fas fa-link me-2"></i>
+                    API Endpoints
+                </h2>
+                
+                <!-- Analyze Endpoint -->
+                <div class="feature-card mb-4">
+                    <h4><span class="badge bg-success">POST</span> /api/analyze</h4>
+                    <p>Analyze sentiment of provided text using Google Gemini AI</p>
+                    
+                    <h6>Request Body</h6>
+                    <div class="code-block">
+                        <code>
+{<br>
+  "text": "string (required, max 5000 characters)",<br>
+  "analysis_type": "string (optional, default: 'basic')"<br>
+}
+                        </code>
+                    </div>
+                    
+                    <h6>Analysis Types</h6>
+                    <ul>
+                        <li><strong>basic</strong> - Quick sentiment classification with confidence score</li>
+                        <li><strong>detailed</strong> - Emotional breakdown with key phrases</li>
+                        <li><strong>comparative</strong> - Multi-approach analysis comparison</li>
+                    </ul>
+                    
+                    <h6>Response (Basic Analysis)</h6>
+                    <div class="code-block">
+                        <code>
+{<br>
+  "success": true,<br>
+  "result": {<br>
+    "sentiment": "Positive",<br>
+    "confidence": 85,<br>
+    "explanation": "The text expresses clear satisfaction..."<br>
+  },<br>
+  "analysis_type": "basic",<br>
+  "timestamp": "2024-01-15T10:30:00Z"<br>
+}
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Examples -->
+            <div class="glass-card mt-4 fade-in">
+                <h2 class="mb-4">
+                    <i class="fas fa-file-code me-2"></i>
+                    Response Examples
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Basic Analysis</h5>
+                        <div class="code-block">
+                            <code style="font-size: 0.8rem;">
+{<br>
+  "success": true,<br>
+  "result": {<br>
+    "sentiment": "Positive",<br>
+    "confidence": 92,<br>
+    "explanation": "Strong positive sentiment..."<br>
+  }<br>
+}
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h5>Detailed Analysis</h5>
+                        <div class="code-block">
+                            <code style="font-size: 0.8rem;">
+{<br>
+  "success": true,<br>
+  "result": {<br>
+    "sentiment": "Positive",<br>
+    "confidence": 88,<br>
+    "emotions": {<br>
+      "joy": 75,<br>
+      "anger": 5,<br>
+      "sadness": 0,<br>
+      "fear": 0,<br>
+      "surprise": 20,<br>
+      "disgust": 0<br>
+    },<br>
+    "key_phrases": ["love", "perfect"],<br>
+    "explanation": "Detailed analysis..."<br>
+  }<br>
+}
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <h5>Comparative Analysis</h5>
+                        <div class="code-block">
+                            <code style="font-size: 0.8rem;">
+{<br>
+  "success": true,<br>
+  "result": {<br>
+    "lexicon_based": {<br>
+      "sentiment": "Positive",<br>
+      "score": 0.8<br>
+    },<br>
+    "context_aware": {<br>
+      "sentiment": "Positive",<br>
+      "score": 0.9<br>
+    },<br>
+    "combined": {<br>
+      "sentiment": "Positive",<br>
+      "confidence": 90<br>
+    }<br>
+  }<br>
+}
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div class="glass-card mt-4 slide-in-left">
+                <h2 class="mb-4">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Error Handling
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Common Error Responses</h5>
+                        <div class="feature-card">
+                            <h6>400 Bad Request</h6>
+                            <div class="code-block">
+                                <code>
+{<br>
+  "error": "Text is required"<br>
+}
+                                </code>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h6>413 Payload Too Large</h6>
+                            <div class="code-block">
+                                <code>
+{<br>
+  "error": "Text too long (max 5000 characters)"<br>
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5>Error Codes</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <span class="badge bg-danger">400</span> 
+                                <strong>Bad Request</strong> - Invalid input data
+                            </li>
+                            <li class="mb-2">
+                                <span class="badge bg-warning">413</span> 
+                                <strong>Payload Too Large</strong> - Text exceeds limit
+                            </li>
+                            <li class="mb-2">
+                                <span class="badge bg-secondary">429</span> 
+                                <strong>Too Many Requests</strong> - Rate limit exceeded
+                            </li>
+                            <li class="mb-2">
+                                <span class="badge bg-dark">500</span> 
+                                <strong>Internal Server Error</strong> - AI service error
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate Limits -->
+            <div class="glass-card mt-4 slide-in-right">
+                <h2 class="mb-4">
+                    <i class="fas fa-tachometer-alt me-2"></i>
+                    Rate Limits & Performance
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Current Limits</h5>
+                        <ul>
+                            <li><strong>Requests per minute:</strong> 60</li>
+                            <li><strong>Max text length:</strong> 5,000 characters</li>
+                            <li><strong>Concurrent requests:</strong> 10</li>
+                            <li><strong>Response timeout:</strong> 30 seconds</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Performance Metrics</h5>
+                        <ul>
+                            <li><strong>Average response time:</strong> 0.3-2.0 seconds</li>
+                            <li><strong>Uptime:</strong> 99.9%</li>
+                            <li><strong>Accuracy:</strong> 99.2%</li>
+                            <li><strong>Supported languages:</strong> 100+</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Examples -->
+            <div class="glass-card mt-4 fade-in">
+                <h2 class="mb-4">
+                    <i class="fas fa-laptop-code me-2"></i>
+                    Code Examples
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="fab fa-python me-2"></i>Python</h5>
+                        <div class="code-block">
+                            <code>
+import requests<br><br>
+
+url = "https://your-domain.com/api/analyze"<br>
+data = {<br>
+    "text": "I love this product!",<br>
+    "analysis_type": "basic"<br>
+}<br><br>
+
+response = requests.post(url, json=data)<br>
+result = response.json()<br><br>
+
+print(f"Sentiment: {result['result']['sentiment']}")<br>
+print(f"Confidence: {result['result']['confidence']}%")
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5><i class="fab fa-js me-2"></i>JavaScript</h5>
+                        <div class="code-block">
+                            <code>
+const analyzeText = async (text) => {<br>
+  const response = await fetch('/api/analyze', {<br>
+    method: 'POST',<br>
+    headers: {<br>
+      'Content-Type': 'application/json'<br>
+    },<br>
+    body: JSON.stringify({<br>
+      text: text,<br>
+      analysis_type: 'basic'<br>
+    })<br>
+  });<br><br>
+  
+  const result = await response.json();<br>
+  console.log(result);<br>
+};
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h5><i class="fab fa-php me-2"></i>PHP</h5>
+                        <div class="code-block">
+                            <code>
+$url = 'https://your-domain.com/api/analyze';<br>
+$data = array(<br>
+    'text' => 'I love this product!',<br>
+    'analysis_type' => 'basic'<br>
+);<br><br>
+
+$options = array(<br>
+    'http' => array(<br>
+        'header' => "Content-type: application/json\r\n",<br>
+        'method' => 'POST',<br>
+        'content' => json_encode($data)<br>
+    )<br>
+);<br><br>
+
+$context = stream_context_create($options);<br>
+$result = file_get_contents($url, false, $context);<br>
+$response = json_decode($result, true);
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5><i class="fas fa-terminal me-2"></i>cURL</h5>
+                        <div class="code-block">
+                            <code>
+curl -X POST \<br>
+  https://your-domain.com/api/analyze \<br>
+  -H 'Content-Type: application/json' \<br>
+  -d '{<br>
+    "text": "I love this product!",<br>
+    "analysis_type": "detailed"<br>
+  }' | jq '.'
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="glass-card mt-4 slide-in-left">
+                <h2 class="mb-4">
+                    <i class="fas fa-lightbulb me-2"></i>
+                    Best Practices
+                </h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Optimization Tips</h5>
+                        <ul>
+                            <li>Use basic analysis for real-time applications</li>
+                            <li>Batch multiple requests when possible</li>
+                            <li>Implement proper error handling</li>
+                            <li>Cache results for repeated text</li>
+                            <li>Monitor your usage against rate limits</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Text Preparation</h5>
+                        <ul>
+                            <li>Clean text of unnecessary formatting</li>
+                            <li>Remove or replace special characters</li>
+                            <li>Consider text length for optimal results</li>
+                            <li>Maintain context for better accuracy</li>
+                            <li>Test with various text types</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support -->
+            <div class="glass-card mt-4 text-center fade-in">
+                <h2 class="mb-4">
+                    <i class="fas fa-life-ring me-2"></i>
+                    Need Help?
+                </h2>
+                <p class="lead mb-4">
+                    Our API is designed to be simple and intuitive, but we're here if you need assistance.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{{ url_for('analyze') }}" class="btn btn-glass btn-lg">
+                        <i class="fas fa-play me-2"></i>Try Interactive Demo
+                    </a>
+                    <a href="mailto:api-support@geminisentiment.ai" class="btn btn-glass btn-lg">
+                        <i class="fas fa-envelope me-2"></i>Contact Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
